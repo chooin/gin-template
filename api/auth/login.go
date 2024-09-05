@@ -1,10 +1,12 @@
 package auth
 
 import (
-	"app/models/response"
+	"app/models/responses"
 	"github.com/labstack/echo/v4"
 )
 
 func Login(c echo.Context) error {
-	return response.Ok(c, "Halo")
+	response := responses.New(c)
+	response.AddClientError("Invalid username or password", 400)
+	return response.ClientException()
 }

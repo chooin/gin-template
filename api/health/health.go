@@ -1,12 +1,13 @@
 package health
 
 import (
-	"app/models/response"
+	"app/models/responses"
 	"github.com/labstack/echo/v4"
 )
 
 func Get(c echo.Context) error {
-	return response.Ok(c, response.Data{
+	response := responses.New(c)
+	return response.Ok(responses.Data{
 		"status": "UP",
 	})
 }
