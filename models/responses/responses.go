@@ -6,7 +6,7 @@ import (
 )
 
 type Responses interface {
-	AddClientError(message string, code int)
+	AddClientError(message string, code int) *ResponseImpl
 	HasClientError() bool
 	Ok(data any, code ...int) error
 	NoContent() error
@@ -64,11 +64,12 @@ func (r *ResponseImpl) ServerException(message string, code ...int) error {
 	})
 }
 
-func (r *ResponseImpl) AddClientError(message string, code int) {
+func (r *ResponseImpl) AddClientError(message string, code int) *ResponseImpl {
 	r.clientErrors = append(r.clientErrors, Error{
 		Code:    code,
 		Message: message,
 	})
+	return r
 }
 
 func (r *ResponseImpl) HasClientError() bool {
