@@ -7,6 +7,7 @@ import (
 
 func Login(c echo.Context) error {
 	response := responses.New(c)
-	response.AddClientError("Invalid username or password", 400)
+	response.AddClientError("Invalid username", 400)
+	response.AddClientError("Invalid password", 400)
 	return response.ClientException()
 }
